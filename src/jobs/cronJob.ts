@@ -32,5 +32,5 @@ export async function job() {
 
 export const startBackgroundJob = () => {
   console.log('Initializing background job...');
-  cron.schedule('0 */2 * * *', job);
+  cron.schedule('*/2 * * * *', job);
 };

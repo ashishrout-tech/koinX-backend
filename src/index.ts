@@ -1,7 +1,7 @@
 import express from 'express';
 import { connectDB } from './db';
 import * as dotenv from 'dotenv';
-import { job } from './jobs/cronJob';
+import { startBackgroundJob } from './jobs/cronJob';
 import { deviationRouter, statsRouter } from './routes';
 import cors from 'cors';
 
@@ -21,7 +21,7 @@ async function main() {
     res.send('Server is running...');
   });
 
-  await job();
+  startBackgroundJob();
 
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
