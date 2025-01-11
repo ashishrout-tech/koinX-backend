@@ -16,10 +16,13 @@ export const fetchCoinData = async () => {
   };
 
   try {
-    const response = await axios.get(process.env.COINGECKO_BASE_URL as string, {
-      params,
-      headers,
-    });
+    const response = await axios.get(
+      `${process.env.COINGECKO_BASE_URL}/simple/price`,
+      {
+        params,
+        headers,
+      }
+    );
     return response.data;
   } catch (error) {
     console.error('Error fetching data from CoinGecko:', error);
