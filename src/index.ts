@@ -2,7 +2,7 @@ import express from 'express';
 import { connectDB } from './db';
 import * as dotenv from 'dotenv';
 import { job } from './jobs/cronJob';
-import { statsRouter } from './routes';
+import { deviationRouter, statsRouter } from './routes';
 import cors from 'cors';
 
 dotenv.config();
@@ -15,12 +15,13 @@ async function main() {
   await connectDB();
 
   app.use('/stats', statsRouter);
+  app.use('/deviation', deviationRouter);
 
   app.get('/', (req, res) => {
     res.send('Server is running...');
   });
 
-  // await job();
+  await job();
 
   const PORT = process.env.PORT || 3000;
   app.listen(PORT, () => {
