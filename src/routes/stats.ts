@@ -1,6 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { CryptoData } from '../models';
 import { coinSchema } from '../schemas';
+import { Errors } from '../utils/error';
 
 const router = Router();
 
@@ -8,9 +9,7 @@ router.get('/', async (req: Request, res: Response): Promise<any> => {
   try {
     const result = coinSchema.safeParse(req.query);
     if (!result.success) {
-      return res.status(400).json({
-        error: `Invalid coin. Supported coins are: ${result.error.format().coin?._errors.join(', ')}`,
-      });
+      return Errors.INVALID_COIN(res);
     }
 
     const { coin } = result.data;
@@ -22,9 +21,7 @@ router.get('/', async (req: Request, res: Response): Promise<any> => {
       .exec();
 
     if (!latestData) {
-      return res
-        .status(404)
-        .json({ error: 'No data found for the requested coin' });
+      return Errors.NO_DATA_FOUND(res);
     }
 
     const response = {
@@ -36,7 +33,7 @@ router.get('/', async (req: Request, res: Response): Promise<any> => {
     res.status(200).json(response);
   } catch (error) {
     console.error('Error in /stats API:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    return Errors.INTERNAL_SERVER_ERROR(res);
   }
 });
 
