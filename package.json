@@ -14,6 +14,7 @@
   "description": "",
   "devDependencies": {
     "@eslint/js": "^9.17.0",
+    "@types/express": "^5.0.0",
     "@types/node-cron": "^3.0.11",
     "@typescript-eslint/eslint-plugin": "^8.19.1",
     "@typescript-eslint/parser": "^8.19.1",
@@ -27,14 +28,15 @@
     "typescript-eslint": "^8.19.1"
   },
   "dependencies": {
+    "@types/cors": "^2.8.17",
     "axios": "^1.7.9",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
+    "express": "^4.21.2",
     "module-alias": "^2.2.3",
     "mongoose": "^8.9.4",
     "node-cron": "^3.0.3",
-    "tsconfig-paths": "^4.2.0"
-  },
-  "_moduleAliases": {
-    "@": "./dist"
-  } 
+    "tsconfig-paths": "^4.2.0",
+    "zod": "^3.24.1"
+  }
 }
